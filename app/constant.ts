@@ -314,6 +314,8 @@ const openaiModels = [
   "dall-e-3",
   "o1-mini",
   "o1-preview",
+  "gemini-2.0-flash-exp",
+  "gemini-2.0-flash-exp-search",
 ];
 
 const googleModels = [
@@ -325,8 +327,6 @@ const googleModels = [
   "learnlm-1.5-pro-experimental",
   "gemini-pro-vision",
   "gemini-exp-1206",
-  "gemini-2.0-flash-exp",
-  "gemini-2.0-flash-exp-search",
 ];
 
 const anthropicModels = [
