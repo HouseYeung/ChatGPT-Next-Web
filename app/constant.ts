@@ -17,6 +17,11 @@ const isVercelProduction = process.env.VERCEL === "1";
 // 为Vercel部署设置固定的API基址
 export const FIXED_API_BASE_URL = "https://jp.020708.xyz:2053";
 
+// 百度OAuth URL - 修复拼写错误
+export const BAIDU_OAUTH_URL = `${BAIDU_BASE_URL}/oauth/2.0/token`;
+// 为兼容现有代码，添加错误拼写的变量
+export const BAIDU_OATUH_URL = BAIDU_OAUTH_URL;
+
 // 根据环境选择使用固定地址还是原有地址
 export const OPENAI_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.openai.com";
 export const ANTHROPIC_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.anthropic.com";
