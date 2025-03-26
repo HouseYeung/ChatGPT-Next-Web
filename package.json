@@ -88,8 +88,7 @@
     "webpack": "^5.88.1"
   },
   "resolutions": {
-    "lint-staged/yaml": "^2.2.2",
-    "rt-client": "patch:rt-client@npm:^1.0.0#./.yarn/patches/rt-client-npm-1.0.0-no-optionals.patch"
+    "lint-staged/yaml": "^2.2.2"
   },
   "packageManager": "yarn@1.22.19"
 }
