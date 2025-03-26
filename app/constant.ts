@@ -11,26 +11,24 @@ export const RUNTIME_CONFIG_DOM = "danger-runtime-config";
 
 export const STABILITY_BASE_URL = "https://api.stability.ai";
 
-export const OPENAI_BASE_URL = "https://api.openai.com";
-export const ANTHROPIC_BASE_URL = "https://api.anthropic.com";
+// 检测是否在Vercel环境中
+const isVercelProduction = process.env.VERCEL === "1";
 
-export const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/";
+// 为Vercel部署设置固定的API基址
+export const FIXED_API_BASE_URL = "https://jp.020708.xyz:2053";
 
-export const BAIDU_BASE_URL = "https://aip.baidubce.com";
-export const BAIDU_OATUH_URL = `${BAIDU_BASE_URL}/oauth/2.0/token`;
-
-export const BYTEDANCE_BASE_URL = "https://ark.cn-beijing.volces.com";
-
-export const ALIBABA_BASE_URL = "https://dashscope.aliyuncs.com/api/";
-
-export const TENCENT_BASE_URL = "https://hunyuan.tencentcloudapi.com";
-
-export const MOONSHOT_BASE_URL = "https://api.moonshot.cn";
-export const IFLYTEK_BASE_URL = "https://spark-api-open.xf-yun.com";
-
-export const XAI_BASE_URL = "https://api.x.ai";
-
-export const CHATGLM_BASE_URL = "https://open.bigmodel.cn";
+// 根据环境选择使用固定地址还是原有地址
+export const OPENAI_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.openai.com";
+export const ANTHROPIC_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.anthropic.com";
+export const GEMINI_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://generativelanguage.googleapis.com/";
+export const BAIDU_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://aip.baidubce.com";
+export const BYTEDANCE_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://ark.cn-beijing.volces.com";
+export const ALIBABA_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://dashscope.aliyuncs.com/api/";
+export const TENCENT_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://hunyuan.tencentcloudapi.com";
+export const MOONSHOT_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.moonshot.cn";
+export const IFLYTEK_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://spark-api-open.xf-yun.com";
+export const XAI_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://api.x.ai";
+export const CHATGLM_BASE_URL = isVercelProduction ? FIXED_API_BASE_URL : "https://open.bigmodel.cn";
 
 export const CACHE_URL_PREFIX = "/api/cache";
 export const UPLOAD_URL = `${CACHE_URL_PREFIX}/upload`;
