@@ -11,26 +11,26 @@ export const RUNTIME_CONFIG_DOM = "danger-runtime-config";
 
 export const STABILITY_BASE_URL = "https://api.stability.ai";
 
-export const OPENAI_BASE_URL = "https://jp.020708.xyz:2053";
-export const ANTHROPIC_BASE_URL = "https://jp.020708.xyz:2053";
+export const OPENAI_BASE_URL = "https://api.openai.com";
+export const ANTHROPIC_BASE_URL = "https://api.anthropic.com";
 
-export const GEMINI_BASE_URL = "https://jp.020708.xyz:2053";
+export const GEMINI_BASE_URL = "https://generativelanguage.googleapis.com/";
 
-export const BAIDU_BASE_URL = "https://jp.020708.xyz:2053";
+export const BAIDU_BASE_URL = "https://aip.baidubce.com";
 export const BAIDU_OATUH_URL = `${BAIDU_BASE_URL}/oauth/2.0/token`;
 
-export const BYTEDANCE_BASE_URL = "https://jp.020708.xyz:2053";
+export const BYTEDANCE_BASE_URL = "https://ark.cn-beijing.volces.com";
 
-export const ALIBABA_BASE_URL = "https://jp.020708.xyz:2053";
+export const ALIBABA_BASE_URL = "https://dashscope.aliyuncs.com/api/";
 
-export const TENCENT_BASE_URL = "https://jp.020708.xyz:2053";
+export const TENCENT_BASE_URL = "https://hunyuan.tencentcloudapi.com";
 
-export const MOONSHOT_BASE_URL = "https://jp.020708.xyz:2053";
-export const IFLYTEK_BASE_URL = "https://jp.020708.xyz:2053";
+export const MOONSHOT_BASE_URL = "https://api.moonshot.cn";
+export const IFLYTEK_BASE_URL = "https://spark-api-open.xf-yun.com";
 
-export const XAI_BASE_URL = "https://jp.020708.xyz:2053";
+export const XAI_BASE_URL = "https://api.x.ai";
 
-export const CHATGLM_BASE_URL = "https://jp.020708.xyz:2053";
+export const CHATGLM_BASE_URL = "https://open.bigmodel.cn";
 
 export const CACHE_URL_PREFIX = "/api/cache";
 export const UPLOAD_URL = `${CACHE_URL_PREFIX}/upload`;
@@ -574,3 +574,26 @@ export const PLUGINS = [
 
 export const SAAS_CHAT_URL = "https://nextchat.dev/chat";
 export const SAAS_CHAT_UTM_URL = "https://nextchat.dev/chat?utm=github";
+
+export function cloudflareAIGatewayUrl(fetchUrl: string) {
+  try {
+    const url = new URL(fetchUrl);
+    const paths = url.pathname.split("/");
+    
+    if (url.hostname === "gateway.ai.cloudflare.com") {
+      // 处理 Cloudflare AI Gateway 的情况
+      if (paths[5] === "azure-openai") {
+        const newPath = [...paths.slice(0, 7), ...paths.slice(-3)].join("/");
+        url.pathname = newPath;
+      } else if (["openai", "anthropic"].includes(paths[5])) {
+        const newPath = [...paths.slice(0, 6), ...paths.slice(-2)].join("/");
+        url.pathname = newPath;
+      }
+      return url.toString(); // 这将保留端口号
+    }
+    return fetchUrl;
+  } catch (e) {
+    // 如果 URL 解析失败，返回原始 URL
+    return fetchUrl;
+  }
+}
