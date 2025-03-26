@@ -574,26 +574,3 @@ export const PLUGINS = [
 
 export const SAAS_CHAT_URL = "https://nextchat.dev/chat";
 export const SAAS_CHAT_UTM_URL = "https://nextchat.dev/chat?utm=github";
-
-export function cloudflareAIGatewayUrl(fetchUrl: string) {
-  try {
-    const url = new URL(fetchUrl);
-    const paths = url.pathname.split("/");
-    
-    if (url.hostname === "gateway.ai.cloudflare.com") {
-      // 处理 Cloudflare AI Gateway 的情况
-      if (paths[5] === "azure-openai") {
-        const newPath = [...paths.slice(0, 7), ...paths.slice(-3)].join("/");
-        url.pathname = newPath;
-      } else if (["openai", "anthropic"].includes(paths[5])) {
-        const newPath = [...paths.slice(0, 6), ...paths.slice(-2)].join("/");
-        url.pathname = newPath;
-      }
-      return url.toString(); // 这将保留端口号
-    }
-    return fetchUrl;
-  } catch (e) {
-    // 如果 URL 解析失败，返回原始 URL
-    return fetchUrl;
-  }
-}

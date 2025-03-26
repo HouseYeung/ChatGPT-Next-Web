@@ -116,8 +116,7 @@ export class ChatGPTApi implements LLMApi {
 
     console.log("[Proxy Endpoint] ", baseUrl, path);
 
-    // try rebuild url, when using cloudflare ai gateway in client
-    return cloudflareAIGatewayUrl([baseUrl, path].join("/"));
+    return [baseUrl, path].join("/");
   }
 
   async extractMessage(res: any) {
